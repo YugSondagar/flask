@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .task-box {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+     <h2>Welcome, {{ current_user.username }}!</h2>
+     <h3>Your Tasks</h3>
+    <div class="container mt-4">
+        <h2 class="text-center">To-Do List</h2>
+
+        <!-- Pending Tasks Box -->
+        <div class="task-box">
+            <h4>Pending Tasks</h4>
+            <div id="pending-tasks">
+                {% for task in tasks %}
+                    <div class="task">
+                        <span>{{ task.context }}</span> 
+                        <input type="checkbox" onclick="moveTask(this)">
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+
+        <!-- Completed Tasks Box -->
+        <div class="task-box">
+            <h4>Completed Tasks</h4>
+            <div id="completed-tasks"></div>
+        </div>
+    </div>
+    <script>
+        function moveTask(checkbox) {
+            let taskDiv = checkbox.parentElement;
+            checkbox.remove();  // Remove checkbox when task is completed
+            document.getElementById("completed-tasks").appendChild(taskDiv);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">    <!--action = "" means the form will be submitted on same URL-->
+        {{ form.hidden_tag() }}        <!-- Generates hidden CSRF token  CSRF Protection: Ensures that forms can’t be submitted from external sources without the correct token.-->
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+            <div class="form-group">
+                {{ form.context.label(class="form-control-label") }}
+                {% if form.context.errors %}
+                {{ form.context(class="form-control form-control-lg is-invalid") }}
+                {% for error in form.context.errors %}
+                {{error}}
+                {% endfor %}
+                {% else %}
+                {{ form.context(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group mt-2">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
