@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Tracker</title>
+</head>
+<body>
+    <h2>Sentiment Analysizes</h2>
+    <form method ="POST">
+        {{ form.hidden_tag() }}
+        {{ form.text(rows=4, cols=50, placeholder="Type Here.....") }}<br><br>
+        {{ form.submit() }}
+    </form>
+    {% if sentiment %}      
+        <h3>Sentiment : {{ sentiment }}</h3>
+    {% endif %}
+</body>
+</html>
